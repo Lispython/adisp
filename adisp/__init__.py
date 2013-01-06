@@ -1,94 +1,29 @@
-# -*- coding:utf-8 -*-
-'''
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+adisp
+~~~~~
+
 Adisp is a library that allows structuring code with asynchronous calls and
-callbacks without defining callbacks as separate functions. The code then
-becomes sequential and easy to read. The library is not a framework by itself
-and can be used in other environments that provides asynchronous working model
-(see an example with Tornado server in proxy_example.py).
+callbacks without defining callbacks as separate functions.
 
-Usage:
+:copyright: (c) 2009 - 2013 by Ivan Sagalaev.
+:license: BSD, see LICENSE for more details.
+:github: http://github.com/Lispython/adisp
+"""
 
-## Organizing calling code
+__all__ = ('CallbackDispatcher', 'process', 'async')
+__author__ = "Ivan Sagalaev"
+__license__ = "BSD, see LICENSE for more details"
+__version_info__ = (0, 0, 4)
+__build__ = 0x000004
+__version__ = ".".join(map(str, __version_info__))
+__maintainer__ = "Alexandr Lispython (alex@obout.ru)"
 
-All the magic is done with Python 2.5 decorators that allow for control flow to
-leave a function, do sometihing else for some time and then return into the
-calling function with a result. So the function that makes asynchronous calls
-should look like this:
 
-    @process
-    def my_handler():
-        response = yield some_async_func()
-        data = parse_response(response)
-        result = yield some_other_async_func(data)
-        store_result(result)
+def get_version():
+    return __version__
 
-Each `yield` is where the function returns and lets the framework around it to
-do its job. And the code after `yield` is what usually goes in a callback.
-
-The @process decorator is needed around such a function. It makes it callable
-as an ordinary function and takes care of dispatching callback calls back into
-it.
-
-## Writing asynchronous function
-
-In the example above functions "some_async_func" and "some_other_async_func"
-are those that actually run an asynchronous process. They should follow two
-conditions:
-
-- accept a "callback" parameter with a callback function that they should call
-  after an asynchronous process is finished
-- a callback should be called with one parameter -- the result
-- be wrapped in the @async decorator
-
-The @async decorator makes a function call lazy allowing the @process that
-calls it to provide a callback to call.
-
-Using async with @-syntax is most convenient when you write your own
-asynchronous function (and can make your callback parameter to be named
-"callback"). But when you want to call some library function you can wrap it in
-async in place.
-
-    # call http.fetch(url, callback=callback)
-    result = yield async(http.fetch)
-
-    # call http.fetch(url, cb=safewrap(callback))
-    result = yield async(http.fetch, cbname='cb', cbwrapper=safewrap)(url)
-
-Here you can use two optional parameters for async:
-
-- `cbname`: a name of a parameter in which the function expects callbacks
-- `cbwrapper`: a wrapper for the callback iself that will be applied before
-  calling it
-
-## Chain calls
-
-@async function can also be @process'es allowing to effectively chain
-asynchronous calls as it can be done with normal functions. In this case the
-@async decorator shuold be the outer one:
-
-    @async
-    @process
-    def async_calling_other_asyncs(arg, callback):
-        # ....
-
-## Multiple asynchronous calls
-
-The library also allows to call multiple asynchronous functions in parallel and
-get all their result for processing at once:
-
-    @async
-    def async_http_get(url, callback):
-        # get url asynchronously
-        # call callback(response) at the end
-
-    @process
-    def get_stat():
-        urls = ['http://.../', 'http://.../', ... ]
-        responses = yield map(async_http_get, urls)
-
-After *all* the asynchronous calls will complete `responses` will be a list of
-responses corresponding to given urls.
-'''
 from functools import partial
 
 class CallbackDispatcher(object):

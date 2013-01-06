@@ -1,10 +1,28 @@
-Adisp is a library that allows structuring code with asynchronous calls and
-callbacks without defining callbacks as separate functions. The code then
-becomes sequential and easy to read. The library is not a framework by itself
-and can be used in other environments that provides asynchronous working model
-(see an example with Tornado server in proxy_example.py).
+Welcome to adisp's documentation!
+=================================
 
-Usage:
+
+Adisp is a library that allows structuring code with asynchronous calls and
+callbacks without defining callbacks as separate functions.
+
+The code then becomes sequential and easy to read. The library is not a framework by itself
+and can be used in other environments that provides asynchronous working model
+(see an example with Tornado server in examples/proxy_example.py).
+
+INSTALLATION
+------------
+
+To install adisp you can use `easy_install`::
+
+  `easy_install adisp`
+
+or via `pip`::
+
+  `pip adisp`
+
+
+USAGE
+-----
 
 ## Organizing calling code
 
@@ -86,3 +104,20 @@ get all their result for processing at once:
 
 After *all* the asynchronous calls will complete `responses` will be a list of
 responses corresponding to given urls.
+
+
+CONTRIBUTE
+----------
+
+Fork https://github.com/Lispython/adisp/ , create commit and pull request.
+
+
+SEE ALSO
+--------
+
+Originally `adisp`_  developed by Ivan Sagalaev, but no longer supported them.
+
+- `PEP 342 - Coroutines via Enhanced Generators <http://www.python.org/dev/peps/pep-0342/>`_
+- `A Curious Course on Coroutines and Concurrency <http://dabeaz.com/coroutines/>`_
+
+.. _`adisp`: http://softwaremaniacs.org/blog/2009/12/11/adisp/

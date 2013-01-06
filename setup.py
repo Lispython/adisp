@@ -10,9 +10,9 @@ becomes sequential and easy to read. The library is not a framework by itself
 and can be used in other environments that provides asynchronous working model
 (see an example with Tornado server in proxy_example.py).
 
-:copyright: (c) 2009-2012 by Ivan Sagalaev.
-
-
+:copyright: (c) 2009-2013 by Ivan Sagalaev.
+:license: BSD, see LICENSE for more details.
+:github: http://github.com/Lispython/adisp
 """
 
 
@@ -33,7 +33,7 @@ except Exception, e:
     print(e)
     readme_content = __doc__
 
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 
 py_ver = sys.version_info
 
@@ -54,12 +54,12 @@ setup(
     description="Callback-less python async calls dispatcher",
     long_description=readme_content,
     author="Ivan Sagalaev",
-    author_email="maniac@softwaremaniacs.org",
-    maintainer=" van Sagalaev",
-    maintainer_email="maniac@softwaremaniacs.org",
-    url="https://code.launchpad.net/~isagalaev/adisp/trunk",
+    maintainer="Alexandr Lispython",
+    maintainer_email="alex@obout.ru",
+    url="http://github.com/lispython/adisp",
     packages=["adisp"],
     platforms = ['Linux', 'Mac'],
+    license="BSD",
     classifiers=[
         "Environment :: Web Environment",
         "License :: OSI Approved :: BSD License",
@@ -67,6 +67,7 @@ setup(
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX",
         "Topic :: Internet",
-        "Topic :: Software Development :: Libraries"
-        ],
-    )
+        "Topic :: Software Development :: Libraries",
+        "Development Status :: 5 - Production/Stable",
+        "Topic :: Software Development :: Libraries :: Application Frameworks"
+        ])
