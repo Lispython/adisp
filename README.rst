@@ -24,7 +24,8 @@ or via `pip`::
 USAGE
 -----
 
-## Organizing calling code
+Organizing calling code
+^^^^^^^^^^^^^^^^^^^^^^^
 
 All the magic is done with Python 2.5 decorators that allow for control flow to
 leave a function, do sometihing else for some time and then return into the
@@ -45,7 +46,8 @@ The @process decorator is needed around such a function. It makes it callable
 as an ordinary function and takes care of dispatching callback calls back into
 it.
 
-## Writing asynchronous function
+Writing asynchronous function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In the example above functions "some_async_func" and "some_other_async_func"
 are those that actually run an asynchronous process. They should follow two
@@ -76,7 +78,8 @@ Here you can use two optional parameters for async:
 - `cbwrapper`: a wrapper for the callback iself that will be applied before
   calling it
 
-## Chain calls
+Chain calls
+^^^^^^^^^^^
 
 @async function can also be @process'es allowing to effectively chain
 asynchronous calls as it can be done with normal functions. In this case the
@@ -87,7 +90,8 @@ asynchronous calls as it can be done with normal functions. In this case the
     def async_calling_other_asyncs(arg, callback):
         # ....
 
-## Multiple asynchronous calls
+Multiple asynchronous calls
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The library also allows to call multiple asynchronous functions in parallel and
 get all their result for processing at once:
