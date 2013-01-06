@@ -39,24 +39,24 @@ should look like this::
         result = yield some_other_async_func(data)
         store_result(result)
 
-Each `yield` is where the function returns and lets the framework around it to
-do its job. And the code after `yield` is what usually goes in a callback.
+Each ``yield`` is where the function returns and lets the framework around it to
+do its job. And the code after ``yield`` is what usually goes in a callback.
 
-The @process decorator is needed around such a function. It makes it callable
+The ``@process`` decorator is needed around such a function. It makes it callable
 as an ordinary function and takes care of dispatching callback calls back into
 it.
 
 Writing asynchronous function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the example above functions "some_async_func" and "some_other_async_func"
+In the example above functions ``some_async_func`` and ``some_other_async_func``
 are those that actually run an asynchronous process. They should follow two
 conditions:
 
-- accept a "callback" parameter with a callback function that they should call
+- accept a ``callback`` parameter with a callback function that they should call
   after an asynchronous process is finished
 - a callback should be called with one parameter -- the result
-- be wrapped in the @async decorator
+- be wrapped in the ``@async`` decorator
 
 The @async decorator makes a function call lazy allowing the @process that
 calls it to provide a callback to call.
@@ -81,9 +81,9 @@ Here you can use two optional parameters for async:
 Chain calls
 ^^^^^^^^^^^
 
-@async function can also be @process'es allowing to effectively chain
+``@async`` function can also be ``@process'es`` allowing to effectively chain
 asynchronous calls as it can be done with normal functions. In this case the
-@async decorator shuold be the outer one::
+``@async`` decorator shuold be the outer one::
 
     @async
     @process
@@ -106,7 +106,7 @@ get all their result for processing at once::
         urls = ['http://.../', 'http://.../', ... ]
         responses = yield map(async_http_get, urls)
 
-After *all* the asynchronous calls will complete `responses` will be a list of
+After *all* the asynchronous calls will complete ``responses`` will be a list of
 responses corresponding to given urls.
 
 
