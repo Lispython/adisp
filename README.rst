@@ -14,11 +14,11 @@ INSTALLATION
 
 To install adisp you can use `easy_install`::
 
-  `easy_install adisp`
+  easy_install adisp
 
 or via `pip`::
 
-  `pip adisp`
+  pip adisp
 
 
 USAGE
@@ -30,7 +30,7 @@ Organizing calling code
 All the magic is done with Python 2.5 decorators that allow for control flow to
 leave a function, do sometihing else for some time and then return into the
 calling function with a result. So the function that makes asynchronous calls
-should look like this:
+should look like this::
 
     @process
     def my_handler():
@@ -64,7 +64,7 @@ calls it to provide a callback to call.
 Using async with @-syntax is most convenient when you write your own
 asynchronous function (and can make your callback parameter to be named
 "callback"). But when you want to call some library function you can wrap it in
-async in place.
+async in place.::
 
     # call http.fetch(url, callback=callback)
     result = yield async(http.fetch)
@@ -83,7 +83,7 @@ Chain calls
 
 @async function can also be @process'es allowing to effectively chain
 asynchronous calls as it can be done with normal functions. In this case the
-@async decorator shuold be the outer one:
+@async decorator shuold be the outer one::
 
     @async
     @process
@@ -94,7 +94,7 @@ Multiple asynchronous calls
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The library also allows to call multiple asynchronous functions in parallel and
-get all their result for processing at once:
+get all their result for processing at once::
 
     @async
     def async_http_get(url, callback):
